@@ -18,6 +18,7 @@ __version__ = '0.0.1'
 ICON = "mdi:cart"
 ICONEMPTY = "mdi:cart-outline"
 CONF_LISTS = 'lists'
+CONF_LOCALE = 'locale'
 SENSOR_PREFIX = 'bring_shopping_list_'
 
 LOGGER = logging.getLogger(__name__)
@@ -34,6 +35,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     # vol.Optional(CONF_HOST, default='localhost'): cv.string,
     # vol.Optional(CONF_PORT, default=32400): cv.port,
     vol.Required(CONF_LISTS): vol.All(cv.ensure_list, [cv.string]),
+    vol.Optional(CONF_LOCALE, default='en-US'): cv.string,
     # vol.Optional(CONF_IMG_CACHE, default='/custom-lovelace/upcoming-media-card/images/plex/'): cv.string
 })
 
@@ -54,6 +56,10 @@ class BringSensor(Entity):
 
         if 'name' in config:
             self._name = config['name']
+
+        self._locale = 'en-US'
+        if 'locale' in config:
+            self._locale = config['locale']
 
     @property
     def name(self):
@@ -76,6 +82,7 @@ class BringSensor(Entity):
         attrs = {}
         attrs["Purchase"] = self._purchase
         attrs["Recently"] = self._recently
+        attrs["List_Id"] = self._listId
         return attrs
 
     def getList(self, source=[], details=[], articles=[]):
@@ -128,7 +135,7 @@ class BringSensor(Entity):
         This is the only method that should fetch new data for Home Assistant.
         """
         # get articles US
-        url = "https://web.getbring.com/locale/articles.en-US.json"
+        url = f"https://web.getbring.com/locale/articles.{self._locale}.json"
         articles = get(url=url).json()
 
         url = f"https://api.getbring.com/rest/bringlists/{self._listId}/details"
