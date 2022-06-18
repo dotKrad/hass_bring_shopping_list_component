@@ -77,7 +77,7 @@ class BringSensor(Entity):
         return ICON if len(self._purchase) > 0 else ICONEMPTY
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the state attributes."""
         attrs = {}
         attrs["Purchase"] = self._purchase
