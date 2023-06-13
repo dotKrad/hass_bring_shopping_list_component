@@ -2,11 +2,15 @@
   "domain": "bring_shopping_list",
   "name": "Bring Shopping List",
   "documentation": "https://github.com/dotKrad/hass_bring_shopping_list_component",
+  "issue_tracker": "https://github.com/dotKrad/hass_bring_shopping_list_component/issues",
+  "iot_class": "cloud_polling",
   "dependencies": [],
+  "config_flow": true,
   "codeowners": [
-      "@krad"
+    "@krad"
   ],
-  "requirements": [],
-  "homeassistant": "0.96.0",
+  "requirements": [
+    "integrationhelper"
+  ],
   "version": "1.0.0"
 }

@@ -1,0 +1,26 @@
+{
+    "config": {
+        "title": "Bring Shopping List",
+        "step": {
+            "user": {
+                "title": "Bring Shopping List",
+                "description": "If you need help with the configuration have a look here: https://github.com/dotKrad/hass_bring_shopping_list_component",
+                "data": {
+                    "name": "Name",
+                    "username": "Email",
+                    "password": "Password"
+                }
+            }
+        },
+        "error": {
+            "failure": "An error ocurred, please check the logs",
+            "auth": "Username/Password is wrong.",
+            "name_exists": "Configuration already exists.",
+            "invalid_username": "Invalid Email",
+            "invalid_password": "Invalid Password"
+        },
+        "abort": {
+            "single_instance_allowed": "Only a single configuration is allowed."
+        }
+    }
+}
